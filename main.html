@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Palindrome Checker</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body style="background-image: linear-gradient(to right, #E4F5F5 , #B4B4C2);">
+  <h1>Palindrome Checker</h1>
+  <div id="backgroundBox">
+    <h2>Enter in phrase or word and check if it is a palindrome.</h2>
+    <p>Enter your word/phrase in this box: <input type=text id="userInput" style="font-size:15px" /></p>
+    <h2>Click the <i>Check</i> button after entering your guess in the box above
+      <input type="button" id="buttonOne" style="background-color:#3070F0; color:white; font-size:20px" value="Check" onclick="palindrome()" />
+    </h2>
+    <div id="outMsgBox"> ??? </div>
+    <div style="text-align:center; padding:30px">
+      <input type="button" id="buttonTwo" style="background-color:red; color:white; font-size:35px" value="Random Palindrome" onclick="palindromeRandom()" />
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+  function palindrome() {
+    var userInput = document.getElementById("userInput").value;
+    if (userInput === "") {
+      document.getElementById('outMsgBox').innerHTML = "Enter an input knucklehead!";
+    } else {
+      var regexBasic = /[^A-Za-z0-9]/g; //Global regex in order to erase all characters in phrase not a - z, A - Z, 0 - 9
+      replace = userInput.toLowerCase().replace(regexBasic, ''); //replace all characters with lowercase and using regex
+      var length = replace.length;
+      for (var i = 0; i < length / 2; i++) { //for loop to loop through half the length, comparing first half to second half ie. palindrome
+        if (replace[i] !== replace[length - 1 - i]) {
+          document.getElementById('outMsgBox').innerHTML = "That is not a palindrome!";
+          return false;
+        }
+      }
+      document.getElementById('outMsgBox').innerHTML = "That is a palindrome!";
+    }
+  }
+
+  function palindromeRandom() {
+    const palindromesRand = [
+      "civic", "kayak", "level", "madam", "mom", "noon", "racecar", "radar", "redder", "anna", "rotator", "rotor", "stats",
+      "wow", "taco cat", "top spot", "never odd or even", "step on no pets"
+    ]
+    var random = palindromesRand[Math.floor(Math.random() * palindromesRand.length)];
+    document.getElementById('outMsgBox').innerHTML = random;
+  }
+</script>
+
+</html>
